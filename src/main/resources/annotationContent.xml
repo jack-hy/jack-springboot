@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc.xsd  http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+	
+	<bean id="handlerAdapter"
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">		
+		<property name="customReturnValueHandlers">
+			<list>
+				<ref bean="jsonsResponseBodyProcessor" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="jsonsResponseBodyProcessor"
+		class="springboot.util.JsonsResponseBodyMethodPro">
+		<constructor-arg index="0">
+			<list>
+				<ref bean="stringMessageConverter" />
+			</list>
+		</constructor-arg>
+	</bean>
+	
+	<!-- StringMessageConverter -->
+	<bean id="stringMessageConverter"
+		class="org.springframework.http.converter.StringHttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/html;charset=UTF-8
+				</value>
+			</list>
+		</property>
+		<property name="writeAcceptCharset" value="false" />
+	</bean>
+	
+	<!-- class="org.springframework.web.servlet.view.InternalResourceViewResolver" -->
+	<bean id="viewResolver"		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>
+		<property name="prefix" value="/jsp/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+
+
+</beans>
