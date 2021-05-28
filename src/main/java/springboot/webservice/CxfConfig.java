@@ -19,6 +19,8 @@ public class CxfConfig {
  
     @Bean(name = Bus.DEFAULT_BUS_ID)
     public SpringBus springBus() {
+    	
+    	//dev 修改
         return new SpringBus();
     }
  
