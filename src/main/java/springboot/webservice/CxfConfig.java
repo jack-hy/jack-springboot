@@ -19,7 +19,7 @@ public class CxfConfig {
  
     @Bean(name = Bus.DEFAULT_BUS_ID)
     public SpringBus springBus() {
-        return new SpringBus();
+        return new SpringBus(); 
     }
  
     @Bean
