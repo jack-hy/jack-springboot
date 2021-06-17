@@ -15,11 +15,9 @@ import java.util.HashMap;
 import javax.xml.namespace.QName;
 
 import org.apache.cxf.endpoint.Client;
-import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.apache.cxf.jaxws.endpoint.dynamic.JaxWsDynamicClientFactory;
 import org.junit.Test;
 
-import springboot.webservice.WebServiceServer;
 import springboot.wsimportClient.WebService;
 import springboot.wsimportClient.WebServiceServerImplService;
 
@@ -63,17 +61,17 @@ public class Foo {
 	/**
 	 * Apache CXF 是开源的WebService框架，实现ws客户端1，客户端指定接口
 	 */
-	@Test
-	public void getApacheCXF2 () throws Exception {	
-		JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
-		factory.setServiceClass(WebServiceServer.class);
-		factory.setAddress("http://localhost:18080/springboot/springboot-ws/api?wsdl");
-		// 需要服务接口文件
-		WebServiceServer client2 = (WebServiceServer) factory.create();
-		String result2 = client2.getInfo("admin123456");
-		System.out.println(result2);
-		
-	}
+//	@Test
+//	public void getApacheCXF2 () throws Exception {	
+//		JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
+//		factory.setServiceClass(WebServiceServer.class);
+//		factory.setAddress("http://localhost:18080/springboot/springboot-ws/api?wsdl");
+//		// 需要服务接口文件
+//		WebServiceServer client2 = (WebServiceServer) factory.create();
+//		String result2 = client2.getInfo("admin123456");
+//		System.out.println(result2);
+//		
+//	}
 	
 	
 	/**
