@@ -1,5 +1,6 @@
 package springboot.test;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -49,6 +50,26 @@ public class TestController {
 		List<HandlerMethodReturnValueHandler> HandlerMethodReturnValueHandler = bean.getCustomReturnValueHandlers();
 //		System.out.println(HandlerMethodReturnValueHandler.get(0).getClass().getName());
 		
+		
+		
+    	Foo bean1 = SpringUtil.getBean(Foo.class);
+    	Method[] declaredMethods = Foo.class.getDeclaredMethods();
+    	for (int i = 0; i < declaredMethods.length; i++) {
+			Method method = declaredMethods[i];
+			String name = method.getName();
+			System.out.println("name: "+name);
+			if(name.equals("getStudents")) {
+				System.out.println(method);
+			}
+		}
+		System.out.println("bean+++++++++++: "+bean1.name);
+		
+		
+		String[] beanDefinitionNames = SpringUtil.getApplicationContext().getBeanDefinitionNames();
+		for (int i = 0; i < beanDefinitionNames.length; i++) {
+			
+			System.out.println("beanDefinitionNames: "+beanDefinitionNames[i]);
+		}
 		
 		return HandlerMethodReturnValueHandler.getClass().getName();
 	}

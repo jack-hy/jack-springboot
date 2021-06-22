@@ -17,10 +17,12 @@ public class RedisUtil {
     private RedisTemplate<String, Object> redisTemplate;
 
     public void setRedisTemplate(RedisTemplate<String, Object> redisTemplate) {
-        this.redisTemplate = redisTemplate;
+    	this.redisTemplate = redisTemplate;
     }
     //=============================common============================  
-
+    public RedisTemplate<String, Object> getRedisTemplate() {
+        return redisTemplate;
+    }
     /**
      * 指定缓存失效时间
      *

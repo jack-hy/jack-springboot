@@ -6,11 +6,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.UUID;
 
 import javax.xml.namespace.QName;
 
@@ -34,6 +37,13 @@ import springboot.wsimportClient.WebServiceServerImplService;
  *
  */
 public class Foo {
+	
+	@Test
+	public void urlencoder() throws UnsupportedEncodingException {
+		String encode = URLEncoder.encode("汉字", "utf-8");
+		System.out.println( UUID.randomUUID().toString());
+		
+	}
 	
 	/**
 	 * Apache CXF 是开源的WebService框架，实现ws客户端0，动态工厂实现ws客户端

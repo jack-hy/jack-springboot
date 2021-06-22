@@ -9,9 +9,15 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.springframework.stereotype.Component;
+
 import springboot.redis.Students;
 
+@Component
 public class Foo {
+	
+	String name = "default";
+	
 	@SuppressWarnings({ "unchecked", "rawtypes", "resource" })
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
 		

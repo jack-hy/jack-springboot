@@ -1,6 +1,11 @@
 package cn.jiangdoc;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
+import redis.clients.jedis.HostAndPort;
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisCluster;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 /**
@@ -11,12 +16,15 @@ import redis.clients.jedis.JedisPoolConfig;
 public class JedisUtil {
 	public static void main(String[] args) {
 	//ip地址，端口号
-		Jedis jedis = cli_single("idyll.life", 6379);
-		jedis.set("key", "123");
-		String value = jedis.get("key");
-		System.out.println(value);
+		JedisCluster jedis_cli_pool = cli_pool("idyll.life", 8003);
+		jedis_cli_pool.set("jedis_cli_pool", "jedis_cli_pool");		
+		String value2 = jedis_cli_pool.get("jedis_cli_pool");
+		System.out.println(value2);
 		
-//		System.out.println(Integer.parseInt("-13454"));
+//		Jedis jedis_cli_single = cli_single("idyll.life", 8001);
+//		jedis_cli_single.set("jedis_cli_single", "jedis_cli_single");
+//		String value = jedis_cli_single.get("jedis_cli_single");
+//		System.out.println(value);
 		
 	}
 
@@ -43,16 +51,18 @@ public class JedisUtil {
 	 * @param port
 	 * @return
 	 */
-	public static Jedis cli_pool(String host, int port) {
+	public static JedisCluster cli_pool(String host, int port) {
 		JedisPoolConfig config = new JedisPoolConfig();
 		// 最大连接数
 		config.setMaxTotal(10);
 		// 最大连接空闲数
 		config.setMaxIdle(2);
-		JedisPool jedisPool = new JedisPool(config, host, port);
+		Set<HostAndPort> nodes = new LinkedHashSet<HostAndPort>();
+	    nodes.add(new HostAndPort(host, port));		//idyll.life在这里只是作填充
+		
+		JedisCluster JedisCluster = new JedisCluster(nodes, 1000, 1000, 1, "redis123", config);
 		try{
-			
-			return jedisPool.getResource();
+			return JedisCluster;
 		}catch(Exception e){
 			e.printStackTrace();
 			return null;
