@@ -9,7 +9,7 @@ targetNamespace = "http://webservice.springboot/"// 命名空间,一般是接口
 )
 public class WebServiceServerImpl implements WebServiceServer{
 
-	@Override
+//	@Override
 	public String getInfo(String param) {
 		String os = System.getProperty("os.name");
 		return "param: "+ param +"os.name: " + os + " time: " + new Date().getTime();
